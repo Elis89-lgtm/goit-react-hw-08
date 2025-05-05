@@ -1,0 +1,27 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.contactItemWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.button {
+  background-color: rgb(205, 79, 159);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}

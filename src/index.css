@@ -1,0 +1,21 @@
+@import-normalize; /* bring in normalize.css styles */
+
+body {
+  background: linear-gradient(to bottom, #1c2748, #5d5959);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+  margin: 0;
+  padding: 0;
+
+  color: white;
+  font-family: sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  overflow: hidden;
+}
