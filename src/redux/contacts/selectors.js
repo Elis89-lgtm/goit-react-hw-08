@@ -1,27 +1,30 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectFilter } from "../filters/selectors";
 
+// Селектор контактів
 export const selectContacts = (state) => state.contacts.items;
 export const selectIsLoading = (state) => state.contacts.isLoading;
 export const selectIsError = (state) => state.contacts.error;
+
+// Фільтрований список контактів
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],
   (contacts, filter) => {
     if (!filter) return contacts;
-    const isNumberFilter = /^\d+$/.test(filter);
 
-    const normalizedFilter = filter.replace(/\D/g, "");
+    // Приведення фільтра до нижнього регістру
+    const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter((contact) => {
+      // Переведення імені в нижній регістр
+      const normalizedName = contact.name.toLowerCase();
+
+      // Переведення номера у формат без нецифрових символів
       const normalizedNumber = contact.number.replace(/\D/g, "");
 
-      const isNameMatch =
-        !isNumberFilter &&
-        contact.name.toLowerCase().includes(filter.toLowerCase());
-
-      const isNumberMatch = isNumberFilter
-        ? normalizedNumber.includes(normalizedFilter)
-        : false;
+      // Перевірка збігу імені або номера
+      const isNameMatch = normalizedName.includes(normalizedFilter);
+      const isNumberMatch = normalizedNumber.includes(normalizedFilter);
 
       return isNameMatch || isNumberMatch;
     });

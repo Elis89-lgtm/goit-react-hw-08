@@ -47,7 +47,7 @@ export const editContacts = createAsyncThunk(
   async ({ id, name, number }, thunkAPI) => {
     try {
       await axios.patch(`/contacts/${id}`, { name, number });
-      toast.cuccess("Contact updated");
+      toast.success("Contact updated");
       return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

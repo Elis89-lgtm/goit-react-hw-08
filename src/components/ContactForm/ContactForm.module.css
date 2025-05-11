@@ -1,9 +1,12 @@
-.form {
+.Contactform {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 300px;
+  max-width: 320px;
   margin-bottom: 20px;
+  border: 1px solid #ebecee;
+  border-radius: 4px;
+  padding: 14px;
 }
 
 .label {
