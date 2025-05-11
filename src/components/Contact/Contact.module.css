@@ -17,8 +17,16 @@
   align-items: center;
   gap: 4px;
 }
-.button {
+.buttonDelete {
   background-color: rgb(205, 79, 159);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.buttonEdit {
+  background-color: rgb(75, 177, 229);
   color: white;
   border: none;
   padding: 6px 10px;

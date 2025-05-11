@@ -1,0 +1,9 @@
+.UserMenu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.name {
+  font-weight: 700;
+}

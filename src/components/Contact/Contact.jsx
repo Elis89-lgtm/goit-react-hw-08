@@ -1,10 +1,26 @@
 import { PiUser, PiPhone } from "react-icons/pi";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsOps";
+import { useState } from "react";
+import { deleteContact, editContact } from "../../redux/contacts/operations";
 import s from "./Contact.module.css";
+import ModalEditContact from "../ModalEditContact/ModalEditContact";
 
 const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEdit = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleSaveContact = (updatedContact) => {
+    dispatch(editContact(updatedContact));
+  };
+  const handleDelete = () => {
+    dispatch(deleteContact(id));
+  };
 
   return (
     <li className={s.card}>
@@ -19,9 +35,20 @@ const Contact = ({ id, name, number }) => {
           {number}
         </p>
       </div>
-      <button onClick={() => dispatch(deleteContact(id))} className={s.button}>
-        Delete
-      </button>
+      <div className={s.buttonGroup}>
+        <button onClick={handleEdit} className={s.buttonEdit}>
+          Edit
+        </button>
+        <button onClick={handleDelete} className={s.buttonDelete}>
+          Delete
+        </button>
+      </div>
+      <ModalEditContact
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSaveContact}
+        contact={{ id, name, number }}
+      />
     </li>
   );
 };
