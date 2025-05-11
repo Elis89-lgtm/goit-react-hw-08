@@ -28,6 +28,7 @@ const ModalEditContact = ({ isOpen, onClose, onSave, contact }) => {
     setNumber(contact.number);
   };
   const handleSave = () => {
+    console.log("Saving contact:", { ...contact, name, number });
     onSave({ ...contact, name, number });
     onClose();
   };

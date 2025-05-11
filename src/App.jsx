@@ -1,12 +1,11 @@
 import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import AppBar from "./components/AppBar/AppBar";
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
-import { refreshUser } from "../src/redux/auth/operations";
-import { selectIsRefreshing } from "../src/redux/auth/selectors";
+import { refreshUser } from "./redux/auth/operations";
+import { selectIsRefreshing } from "./redux/auth/selectors";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 
@@ -30,7 +29,7 @@ const App = () => {
   ) : (
     <div className="app">
       <Layout>
-        <Suspense fallback={null}>
+        <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
@@ -38,7 +37,7 @@ const App = () => {
               element={
                 <RestrictedRoute
                   redirectTo="/contacts"
-                  component={<RegistrationPage />}
+                  element={<RegistrationPage />}
                 />
               }
             />
@@ -47,17 +46,14 @@ const App = () => {
               element={
                 <RestrictedRoute
                   redirectTo="/contacts"
-                  component={<LoginPage />}
+                  element={<LoginPage />}
                 />
               }
             />
             <Route
               path="/contacts"
               element={
-                <PrivateRoute
-                  redirectTo="/login"
-                  component={<ContactsPage />}
-                />
+                <PrivateRoute redirectTo="/login" element={<ContactsPage />} />
               }
             />
           </Routes>
@@ -67,4 +63,5 @@ const App = () => {
     </div>
   );
 };
+
 export default App;
