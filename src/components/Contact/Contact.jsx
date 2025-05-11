@@ -1,7 +1,7 @@
 import { PiUser, PiPhone } from "react-icons/pi";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { deleteContact, editContact } from "../../redux/contacts/operations";
+import { deleteContact, editContacts } from "../../redux/contacts/operations";
 import s from "./Contact.module.css";
 import ModalEditContact from "../ModalEditContact/ModalEditContact";
 
@@ -16,7 +16,7 @@ const Contact = ({ id, name, number }) => {
     setIsModalOpen(false);
   };
   const handleSaveContact = (updatedContact) => {
-    dispatch(editContact(updatedContact));
+    dispatch(editContacts(updatedContact));
   };
   const handleDelete = () => {
     dispatch(deleteContact(id));
