@@ -46,21 +46,22 @@ const Contact = ({ contact }) => {
           {contact.number}
         </p>
       </div>
-
-      <button
-        onClick={handleEditModalOpen}
-        type="button"
-        className={s.buttonEdit}
-      >
-        Edit
-      </button>
-      <button
-        onClick={handleDeleteModalOpen}
-        type="button"
-        className={s.buttonDelete}
-      >
-        Delete
-      </button>
+      <div className={s.buttonContainer}>
+        <button
+          onClick={handleEditModalOpen}
+          type="button"
+          className={s.buttonEdit}
+        >
+          Edit
+        </button>
+        <button
+          onClick={handleDeleteModalOpen}
+          type="button"
+          className={s.buttonDelete}
+        >
+          Delete
+        </button>
+      </div>
 
       {isEditModalOpen && (
         <ModalEditContact

@@ -5,7 +5,11 @@ import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
 import { refreshUser } from "./redux/auth/operations";
-import { selectIsRefreshing } from "./redux/auth/selectors";
+import { fetchContacts } from "./redux/contacts/operations";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "./redux/store";
+import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
+
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 
@@ -19,48 +23,62 @@ const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
 const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector((state) => selectIsLoggedIn(state));
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <strong>Refreshing user...</strong>
-  ) : (
-    <div className="app">
-      <Layout>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route
-              path="/register"
-              element={
-                <RestrictedRoute
-                  redirectTo="/contacts"
-                  element={<RegistrationPage />}
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fetchContacts());
+    }
+  }, [dispatch, isLoggedIn]);
+
+  return (
+    <PersistGate loading={null} persistor={persistor}>
+      {isRefreshing ? (
+        <strong>Refreshing user...</strong>
+      ) : (
+        <div className="app">
+          <Layout>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route
+                  path="/register"
+                  element={
+                    <RestrictedRoute
+                      redirectTo="/contacts"
+                      element={<RegistrationPage />}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <RestrictedRoute
-                  redirectTo="/contacts"
-                  element={<LoginPage />}
+                <Route
+                  path="/login"
+                  element={
+                    <RestrictedRoute
+                      redirectTo="/contacts"
+                      element={<LoginPage />}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/contacts"
-              element={
-                <PrivateRoute redirectTo="/login" element={<ContactsPage />} />
-              }
-            />
-          </Routes>
-        </Suspense>
-      </Layout>
-      <Toaster position="top-center" reverseOrder={false} />
-    </div>
+                <Route
+                  path="/contacts"
+                  element={
+                    <PrivateRoute
+                      redirectTo="/login"
+                      element={<ContactsPage />}
+                    />
+                  }
+                />
+              </Routes>
+            </Suspense>
+          </Layout>
+          <Toaster position="top-center" reverseOrder={false} />
+        </div>
+      )}
+    </PersistGate>
   );
 };
 
