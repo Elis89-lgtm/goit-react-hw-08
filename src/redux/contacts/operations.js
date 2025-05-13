@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 
 axios.defaults.baseURL = "https://connections-api.goit.global";
 
-// ✨ Підтягуємо токен із Redux
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };

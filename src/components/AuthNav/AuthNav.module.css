@@ -3,9 +3,9 @@
   text-decoration: none;
   padding: 12px;
   font-weight: 700;
-  color: #e4eaec;
+  color: rgb(229, 235, 233);
 }
 
-.link.active {
-  color: #da6976;
+.active {
+  color: aquamarine;
 }

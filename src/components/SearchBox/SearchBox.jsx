@@ -1,24 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setNameFilter } from "../../redux/filters/slice";
-
+import { selectFilter } from "../../redux/filters/selectors";
 import s from "./SearchBox.module.css";
 
 const SearchBox = () => {
   const dispatch = useDispatch();
-  const value = useSelector((state) => state.filters.name);
+  const searchValue = useSelector(selectFilter);
+
   const handleSetNameFilter = (e) => {
     dispatch(setNameFilter(e.target.value));
   };
 
   return (
-    <div className={s.wrapper}>
-      <label className={s.label} htmlFor="search">
+    <div className={s.searchBox}>
+      <label className={s.searchLabel} htmlFor="search">
         Find contacts by name/number
         <input
           type="text"
-          value={value}
+          value={searchValue}
           onChange={handleSetNameFilter}
-          className={s.input}
+          className={s.searchInput}
         />
       </label>
     </div>

@@ -11,11 +11,10 @@ body {
 
   color: white;
   font-family: sans-serif;
-
+  border-color: white;
+  border-radius: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-
-  overflow: hidden;
 }

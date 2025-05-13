@@ -5,15 +5,15 @@ body,
   margin: 0;
   padding: 0;
 }
-.container {
+.app {
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
   border: 2px solid white;
   border-radius: 10px;
-  max-width: 400px;
-
+  max-width: 800px;
+  padding-bottom: 20px;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;

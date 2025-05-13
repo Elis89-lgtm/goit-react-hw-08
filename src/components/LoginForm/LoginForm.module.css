@@ -16,7 +16,10 @@
   outline: transparent;
   transition: border-color 0.3s;
 }
-.contactFormField:hover,
-.contactFormField:focus {
-  border-color: #1eb6c1;
+.btn:hover,
+.btn:focus {
+  border-color: #0ed414;
+}
+.btn {
+  background-color: aquamarine;
 }

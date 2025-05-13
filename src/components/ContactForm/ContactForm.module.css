@@ -1,36 +1,54 @@
-.Contactform {
+.contactForm {
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
   gap: 12px;
-  max-width: 320px;
+  max-width: 400px;
   margin-bottom: 20px;
-  border: 1px solid #ebecee;
+  border: 1px #ebecee;
   border-radius: 4px;
-  padding: 14px;
+  padding: 12px;
 }
 
-.label {
+.nameLabel {
   display: flex;
   flex-direction: column;
+  text-align: left;
+  font-weight: 500;
 }
-
-.input {
+.numberlabel {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: 500;
+}
+.contField {
   padding: 8px;
   font-size: 16px;
+  border-radius: 4px;
 }
-
+.contField:hover,
+.contField:focus {
+  border-color: #bd1cd6;
+}
 .error {
   color: red;
   font-size: 14px;
   margin-top: 4px;
 }
 
-.button {
-  padding: 8px 12px;
+.addContactBtn {
   font-size: 16px;
-
-  color: white;
-  border: none;
+  background-color: aquamarine;
+  width: 120px;
+  border: 2px solid transparent; /* Прозора рамка */
   cursor: pointer;
   border-radius: 4px;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.addContactBtn:hover,
+.addContactBtn:focus {
+  border-color: #0ed414;
+  background-color: #a7e5c1;
 }

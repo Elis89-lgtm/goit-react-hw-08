@@ -41,7 +41,9 @@ const RegistrationForm = () => {
             className={s.contactFormField}
           />
         </label>
-        <button type="submit">Register</button>
+        <button className={s.button} type="submit">
+          Register
+        </button>
       </Form>
     </Formik>
   );

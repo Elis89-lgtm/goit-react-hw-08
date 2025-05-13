@@ -7,3 +7,16 @@
 .name {
   font-weight: 700;
 }
+.button {
+  background-color: #3399e1;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.button:active,
+.button:focus {
+  background-color: #e21ce9;
+}

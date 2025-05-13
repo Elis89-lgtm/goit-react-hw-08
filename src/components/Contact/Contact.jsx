@@ -4,52 +4,81 @@ import { useState } from "react";
 import { deleteContact, editContacts } from "../../redux/contacts/operations";
 import s from "./Contact.module.css";
 import ModalEditContact from "../ModalEditContact/ModalEditContact";
+import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
 
-const Contact = ({ id, name, number }) => {
+const Contact = ({ contact }) => {
   const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const handleEdit = () => {
-    setIsModalOpen(true);
+  const handleEditModalOpen = () => {
+    setIsEditModalOpen(true);
   };
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleEditModalClose = () => {
+    setIsEditModalOpen(false);
   };
-  const handleSaveContact = (updatedContact) => {
-    dispatch(editContacts(updatedContact));
+
+  const handleDeleteModalOpen = () => {
+    setIsDeleteModalOpen(true);
+  };
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
+  const handleSaveChanges = (updatedContact) => {
+    dispatch(editContacts({ id: contact.id, ...updatedContact }));
+    handleEditModalClose();
   };
   const handleDelete = () => {
-    dispatch(deleteContact(id));
+    dispatch(deleteContact(contact.id));
+    handleDeleteModalClose();
   };
 
   return (
-    <li className={s.card}>
+    <>
       <div className={s.contactWrapper}>
         <p className={s.contactRow}>
           <PiUser size={24} />
-          {name}
+          {contact.name}
         </p>
 
         <p className={s.contactRow}>
           <PiPhone size={24} />
-          {number}
+          {contact.number}
         </p>
       </div>
-      <div className={s.buttonGroup}>
-        <button onClick={handleEdit} className={s.buttonEdit}>
-          Edit
-        </button>
-        <button onClick={handleDelete} className={s.buttonDelete}>
-          Delete
-        </button>
-      </div>
-      <ModalEditContact
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSave={handleSaveContact}
-        contact={{ id, name, number }}
-      />
-    </li>
+
+      <button
+        onClick={handleEditModalOpen}
+        type="button"
+        className={s.buttonEdit}
+      >
+        Edit
+      </button>
+      <button
+        onClick={handleDeleteModalOpen}
+        type="button"
+        className={s.buttonDelete}
+      >
+        Delete
+      </button>
+
+      {isEditModalOpen && (
+        <ModalEditContact
+          isOpen={isEditModalOpen}
+          onClose={handleEditModalClose}
+          onSave={handleSaveChanges}
+          contact={contact}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <ModalConfirmDelete
+          isOpen={isDeleteModalOpen}
+          onClose={handleDeleteModalClose}
+          onConfirm={handleDelete}
+          contactName={contact.name}
+        />
+      )}
+    </>
   );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { Field, Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +34,9 @@ const LoginForm = () => {
             className={s.contactFormField}
           />
         </label>
-        <button type="submit">Log In</button>
+        <button className={s.btn} type="submit">
+          Log In
+        </button>
       </Form>
     </Formik>
   );
