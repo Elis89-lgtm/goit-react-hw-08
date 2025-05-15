@@ -11,6 +11,7 @@ import { persistor } from "./redux/store";
 import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
 
 import { Toaster } from "react-hot-toast";
+import Loader from "./components/Loader/Loader";
 import "./App.css";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -38,8 +39,8 @@ const App = () => {
   return (
     <PersistGate loading={null} persistor={persistor}>
       {isRefreshing ? (
-        // null(<strong>Refreshing user...</strong>)
-        <strong>Refreshing user...</strong>
+        // <strong>Refreshing user...</strong>
+        <Loader />
       ) : (
         <div className="app">
           <Layout>
