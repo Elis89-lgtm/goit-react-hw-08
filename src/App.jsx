@@ -38,7 +38,8 @@ const App = () => {
   return (
     <PersistGate loading={null} persistor={persistor}>
       {isRefreshing ? (
-        null(<strong>Refreshing user...</strong>)
+        // null(<strong>Refreshing user...</strong>)
+        <strong>Refreshing user...</strong>
       ) : (
         <div className="app">
           <Layout>
